@@ -16,6 +16,7 @@
     "ngCordova": "~0.1.23-alpha",
     "angular": "~1.4.8",
     "angular-ui-router": "ui-router#~0.2.15",
-    "angular-snap": "~1.8.5"
+    "angular-snap": "~1.8.5",
+    "uikit": "~2.23.0"
   }
 }
