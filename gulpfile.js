@@ -58,6 +58,11 @@ gulp.task('vendor:fonts', function() {
     .pipe(gulp.dest('./www/fonts'))
 });
 
+gulp.task('images', function() {
+  gulp.src('./src/images/**/*')
+    .pipe(gulp.dest('./www/images'))
+});
+
 gulp.task('styles', function () {
   gulp.src('./src/styl/app.styl')
     .pipe(plumber())
@@ -70,7 +75,7 @@ gulp.task('styles', function () {
     .pipe(gulp.dest('./www/css'))
 });
 
-gulp.task('default',['templates','scripts','styles','vendor:js','vendor:css','vendor:fonts'], function() {
+gulp.task('default',['templates','scripts','styles','images','vendor:js','vendor:css','vendor:fonts'], function() {
   gulp.watch('./src/jade/**/*.jade', ['templates']);
   gulp.watch('./src/js/**/*.js', ['scripts']);
   gulp.watch('./src/styl/**/*.styl', ['styles']);

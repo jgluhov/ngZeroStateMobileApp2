@@ -1,7 +1,7 @@
 meyer-reset()
 box-sizing-reset()
 
-html
+*
   -webkit-tap-highlight-color rgba(0,0,0,0)
 
 snap-content, snap-drawer
@@ -10,6 +10,12 @@ snap-content, snap-drawer
 body
   font-family 'Ubuntu', sans-serif !important
   background-color #333
+  color #ffffff
+  -webkit-touch-callout: none; /* prevent callout to copy image, etc when tap to hold */
+  -webkit-text-size-adjust: none; /* prevent webkit from resizing text to fit */
+  -webkit-user-select: none;
+
+/* prevent copy paste, to allow, change 'none' to 'text' */
 
 .snap-content
   background bg-color
@@ -18,3 +24,10 @@ body
 h1
   color #ffffff
   font-size 24px
+
+a
+  color #91e5ff
+  &:hover
+    text-decoration: none;
+    color #7acee8
+
