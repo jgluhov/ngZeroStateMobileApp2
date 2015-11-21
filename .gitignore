@@ -1,6 +1,3 @@
 .idea
 bower_components
 node_modules
-platforms/ios/www
-platforms/browser/www
-platforms/android/assets

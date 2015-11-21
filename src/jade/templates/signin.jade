@@ -1,2 +1,19 @@
 .uk-width-medium-1-2.uk-container-center
-	h1.uk-text-center Signin
+	h1.uk-text-center.tm-margin-bottom.tm-margin-top Signin
+	form.uk-form.uk-text-center
+		.uk-form-row
+			input.uk-form-large.uk-width-8-10(type='text' placeholder='Email or Phone Number')
+		.uk-form-row
+			input.uk-form-large.uk-width-8-10(type='password' placeholder='Password')
+		.uk-form-row
+			button.uk-button.uk-button-large.uk-width-8-10.uk-button-success(type='button') Sign In
+			p.uk-form-help-block.tm-form-help-block.uk-width-8-10.uk-container-center.uk-text-center
+				a.tm-margin-small-left.tm-margin-small-right(href='') Forgot your password?
+	uk.social-list.uk-flex.uk-flex-middle.uk-flex-space-around.tm-margin-top.tm-margin-bottom.uk-width-8-10.uk-text-center.uk-container-center
+		li.google: a(href='')
+		li.facebook: a(href='')
+		li.twitter: a(href='')
+		li.vk: a(href='')
+
+	p.uk-width-8-10.uk-container-center.uk-text-center
+		| or Register new account
