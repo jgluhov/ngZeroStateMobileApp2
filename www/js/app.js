@@ -1396,8 +1396,17 @@ process.chdir = function (dir) {
 }).call(this,require("oMfpAn"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/../../node_modules/gulp-browserify/node_modules/browserify/node_modules/process/browser.js","/../../node_modules/gulp-browserify/node_modules/browserify/node_modules/process")
 },{"buffer":1,"oMfpAn":4}],5:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
+module.exports = function(app) {
+  app.constant('zsConstants', {
+    local: 'http://192.168.0.120:8011/'
+  })
+};
+
+}).call(this,require("oMfpAn"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/constants/index.js","/constants")
+},{"buffer":1,"oMfpAn":4}],6:[function(require,module,exports){
+(function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
 module.exports = function (app) {
-  app.service('CordovaService', ['$document', '$q',
+  app.service('cordovaService', ['$document', '$q',
     function ($document, $q) {
 
       var d = $q.defer(),
@@ -1422,11 +1431,11 @@ module.exports = function (app) {
 };
 
 }).call(this,require("oMfpAn"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/cordova/index.js","/cordova")
-},{"buffer":1,"oMfpAn":4}],6:[function(require,module,exports){
+},{"buffer":1,"oMfpAn":4}],7:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
 'use strict';
 
-
+require('./constants');
 require('./session');
 require('./home');
 
@@ -1436,19 +1445,19 @@ require('./routes')(app);
 require('./cordova')(app);
 
 
-}).call(this, require("oMfpAn"), typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {}, require("buffer").Buffer, arguments[3], arguments[4], arguments[5], arguments[6], "/fake_1c27eb8a.js", "/")
-},{"./cordova":5,"./home":8,"./routes":9,"./session":10,"buffer":1,"oMfpAn":4}],7:[function(require,module,exports){
+}).call(this,require("oMfpAn"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/fake_4ec647c8.js","/")
+},{"./constants":5,"./cordova":6,"./home":9,"./routes":10,"./session":11,"buffer":1,"oMfpAn":4}],8:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
-module.exports = function(home) {
-  home.controller('homeController', ['$scope','CordovaService', function ($scope,CordovaService) {
-    CordovaService.ready.then(function() {
+module.exports = function (home) {
+  home.controller('homeController', ['$scope', 'cordovaService', function ($scope, cordovaService) {
+    cordovaService.ready.then(function () {
       console.log('homeController');
     });
   }]);
 };
 
 }).call(this,require("oMfpAn"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/home/homeController.js","/home")
-},{"buffer":1,"oMfpAn":4}],8:[function(require,module,exports){
+},{"buffer":1,"oMfpAn":4}],9:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
 var home = angular.module('zsHome',[]);
 
@@ -1457,7 +1466,7 @@ require('./homeController')(home);
 module.exports = home;
 
 }).call(this,require("oMfpAn"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/home/index.js","/home")
-},{"./homeController":7,"buffer":1,"oMfpAn":4}],9:[function(require,module,exports){
+},{"./homeController":8,"buffer":1,"oMfpAn":4}],10:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
 module.exports = function(app) {
   app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
@@ -1489,7 +1498,7 @@ module.exports = function(app) {
   );
 };
 }).call(this,require("oMfpAn"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/routes/index.js","/routes")
-},{"buffer":1,"oMfpAn":4}],10:[function(require,module,exports){
+},{"buffer":1,"oMfpAn":4}],11:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
 var session = angular.module('zsSession',[]);
 
@@ -1498,26 +1507,31 @@ require('./signupController')(session);
 
 module.exports = session;
 }).call(this,require("oMfpAn"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/session/index.js","/session")
-},{"./signinController":11,"./signupController":12,"buffer":1,"oMfpAn":4}],11:[function(require,module,exports){
+},{"./signinController":12,"./signupController":13,"buffer":1,"oMfpAn":4}],12:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
+'use strict';
+
 module.exports = function(app) {
-  app.controller('signinController', ['$scope', 'CordovaService', function ($scope,CordovaService) {
-    CordovaService.ready.then(function() {
-      console.log('HelloSigninController');
+  app.controller('signinController', ['$scope', 'cordovaService', 'signinService', function ($scope, cordovaService, signinService) {
+    cordovaService.ready.then(function() {
+
+      signinService.signin(user).then(function(res) {
+        console.log(res);
+      }).catch(function(err) {});
     })
   }]);
 };
 
 }).call(this,require("oMfpAn"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/session/signinController.js","/session")
-},{"buffer":1,"oMfpAn":4}],12:[function(require,module,exports){
+},{"buffer":1,"oMfpAn":4}],13:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
 module.exports = function(app) {
-  app.controller('signupController', ['$scope', 'CordovaService', function ($scope, CordovaService) {
-    CordovaService.ready.then(function() {
+  app.controller('signupController', ['$scope', 'cordovaService', function ($scope, cordovaService) {
+    cordovaService.ready.then(function() {
       console.log('HelloSignupController');
     });
   }]);
 };
 
 }).call(this,require("oMfpAn"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/session/signupController.js","/session")
-},{"buffer":1,"oMfpAn":4}]},{},[6])
+},{"buffer":1,"oMfpAn":4}]},{},[7])

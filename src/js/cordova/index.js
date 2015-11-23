@@ -1,5 +1,5 @@
 module.exports = function (app) {
-  app.service('CordovaService', ['$document', '$q',
+  app.service('cordovaService', ['$document', '$q',
     function ($document, $q) {
 
       var d = $q.defer(),

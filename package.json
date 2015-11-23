@@ -1,0 +1,45 @@
+{
+  "name": "ngZeroStateMobileApp2",
+  "version": "1.0.0",
+  "description": "",
+  "main": "gulpfile.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jgluhov/ngZeroStateMobileApp2.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jgluhov/ngZeroStateMobileApp2/issues"
+  },
+  "homepage": "https://github.com/jgluhov/ngZeroStateMobileApp2#readme",
+  "devDependencies": {
+    "gulp": "^3.9.0",
+    "gulp-browserify": "^0.5.1",
+    "gulp-concat": "^2.6.0",
+    "gulp-jade": "^1.1.0",
+    "gulp-minify-css": "^1.2.1",
+    "gulp-plumber": "^1.0.1",
+    "gulp-rename": "^1.2.2",
+    "gulp-sourcemaps": "^1.6.0",
+    "gulp-stylus": "^2.1.0",
+    "gulp-uglify": "^1.5.1",
+    "kouto-swiss": "^0.11.13"
+  },
+  "dependencies": {
+    "browser-sync": "^2.10.0",
+    "cheerio": "^0.19.0",
+    "csp-parse": "0.0.2",
+    "elementtree": "^0.1.6",
+    "glob": "^6.0.1",
+    "nopt": "^3.0.6",
+    "plist": "^1.2.0",
+    "q": "^1.4.1",
+    "shelljs": "^0.5.3",
+    "which": "^1.2.0"
+  }
+}

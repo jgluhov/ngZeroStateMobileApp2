@@ -1,6 +1,6 @@
 module.exports = function(app) {
-  app.controller('signupController', ['$scope', 'CordovaService', function ($scope, CordovaService) {
-    CordovaService.ready.then(function() {
+  app.controller('signupController', ['$scope', 'cordovaService', function ($scope, cordovaService) {
+    cordovaService.ready.then(function() {
       console.log('HelloSignupController');
     });
   }]);

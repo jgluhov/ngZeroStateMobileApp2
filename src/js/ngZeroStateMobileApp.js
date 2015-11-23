@@ -1,6 +1,6 @@
 'use strict';
 
-
+require('./constants');
 require('./session');
 require('./home');
 
