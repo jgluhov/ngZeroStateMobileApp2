@@ -1,6 +1,7 @@
 .offcanvas.uk-height-1-1
+	p(ng-bind='user.email')
 	ul.uk-nav.uk-nav-offcanvas
 		li: a(ui-sref='home') Home
-		li: a(ui-sref='signin') Signin
-		li: a(ui-sref='signup') Signup
+		li: a(ui-sref='signin' ng-show='!user') Signin
+		li: a(ui-sref='signup' ng-show='!user') Signup
 

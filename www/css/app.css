@@ -254,22 +254,22 @@ a:hover {
   list-style: none;
 }
 .social-list li.google {
-  background-image: url("../images/icons/google.png");
+  background-image: url("../images/icons/button_google_plus.png");
   background-repeat: no-repeat;
   background-size: cover;
 }
 .social-list li.facebook {
-  background-image: url("../images/icons/facebook.png");
+  background-image: url("../images/icons/button_facebook.png");
   background-repeat: no-repeat;
   background-size: cover;
 }
 .social-list li.twitter {
-  background-image: url("../images/icons/twitter.png");
+  background-image: url("../images/icons/button_twitter.png");
   background-repeat: no-repeat;
   background-size: cover;
 }
 .social-list li.vk {
-  background-image: url("../images/icons/vk.png");
+  background-image: url("../images/icons/button_vk.png");
   background-repeat: no-repeat;
   background-size: cover;
 }

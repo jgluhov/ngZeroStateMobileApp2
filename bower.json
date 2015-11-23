@@ -17,6 +17,12 @@
     "angular": "~1.4.8",
     "angular-ui-router": "ui-router#~0.2.15",
     "angular-snap": "~1.8.5",
-    "uikit": "~2.23.0"
+    "uikit": "~2.23.0",
+    "bower": "*",
+    "install": "~1.0.4",
+    "angular-cookies": "~1.4.8"
+  },
+  "devDependencies": {
+    "lodash": "~3.10.1"
   }
 }
