@@ -7,8 +7,6 @@ module.exports = function (app) {
       self.signup = function (user) {
         var defer = $q.defer();
 
-        if (!sessionService.isValidCredentials(user)) defer.reject();
-
         $http.post(constants.local + 'auth', user).then(function (res) {
           defer.resolve(res)
         }).catch(function (err) {

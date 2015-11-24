@@ -7,7 +7,7 @@ module.exports = function (app) {
     self.signin = function (user) {
       var defer = $q.defer();
 
-      $http.get(constants.local + 'auth?email=' + user.email + '&password=' + user.password)
+      $http.get(constants.local + 'auth?session='+ sessionService.sessionUser() + '&email=' + user.email + '&password=' + user.password)
         .then(function () {
           sessionService.saveUser(user);
           defer.resolve(user);

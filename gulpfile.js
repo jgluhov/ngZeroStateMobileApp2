@@ -52,6 +52,10 @@ gulp.task('scripts', function() {
     .pipe(rename('app.min.js'))
     .pipe(sourcemaps.write())
     .pipe(gulp.dest('./www/js'));
+  gulp.src('./src/js/cordova.init.js')
+    .pipe(uglify())
+    .pipe(rename('cordova.init.min.js'))
+    .pipe(gulp.dest('./www/js'))
 });
 
 gulp.task('vendor:fonts', function() {

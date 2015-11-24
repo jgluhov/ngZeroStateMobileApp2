@@ -1426,13 +1426,12 @@ var app = angular.module('ngZeroStateMobileApp', ['ui.router','snap','zsSession'
 require('./routes')(app);
 
 
-}).call(this,require("oMfpAn"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/fake_9d71ee6f.js","/")
+}).call(this,require("oMfpAn"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/fake_fbd1c8a.js","/")
 },{"./constants":6,"./home":9,"./routes":10,"./session":11,"buffer":1,"oMfpAn":4}],8:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
 module.exports = function (home) {
   home.controller('homeController', ['$scope', '$rootScope', 'sessionService',
     function ($scope, $rootScope, sessionService) {
-
 
       if (sessionService.isAuthorized()) {
         $rootScope.user = sessionService.currentUser();
@@ -1481,7 +1480,6 @@ module.exports = function(app) {
             controller: "signupController"
           })
           .state("signout", {
-
             controller: "signoutController"
           })
       }
@@ -1507,28 +1505,45 @@ module.exports = session;
 'use strict';
 
 module.exports = function (app) {
-  app.service('sessionService', ['$http', 'commonConstants', 'localStorageService', function ($http, commonConstants, localStorageService) {
-    var self = this;
+  app.service('sessionService', ['$http', 'commonConstants', 'localStorageService',
+    function ($http, commonConstants, localStorageService) {
+      var self = this;
 
-    self.isAuthorized = function () {
-      return !_.isUndefined(localStorageService.get('email'))
-    };
+      self.isAuthorized = function () {
+        return !_.isNull(localStorageService.get('email'))
+      };
 
-    self.saveUser = function(user) {
-      localStorageService.set('email', user.email)
-    };
-    self.currentUser = function() {
-      return localStorageService.get('email')
-    };
+      self.saveUser = function (user) {
+        localStorageService.set('email', user.email);
+        localStorageService.set('status', !_.isUndefined(user.confirmedEmail));
+        localStorageService.set('session', user.sessionId);
+      };
 
-    self.removeUser = function() {
-      localStorageService.set('email')
-    };
+      self.currentUser = function () {
+        return {
+          email: localStorageService.get('email'),
+          status: localStorageService.get('status'),
+          session: localStorageService.set('session')
+        }
+      };
 
-    self.test = function() {
-      $http.get(commonConstants.local + 'auth')
-    }
-  }])
+      self.removeUser = function () {
+        $http.delete(commonConstants.local + 'auth?session=' + localStorageService.get('session')).then(function() {
+          localStorageService.remove('email');
+          localStorageService.remove('status');
+          localStorageService.remove('session');
+        })
+      };
+
+      self.sessionUser = function() {
+        var id = localStorageService.get('session');
+        return _.isNull(id) ? '' : id;
+      };
+
+      self.test = function () {
+        $http.get(commonConstants.local + 'auth?session=' + self.sessionUser())
+      }
+    }])
 };
 
 }).call(this,require("oMfpAn"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/session/sessionService.js","/session")
@@ -1561,7 +1576,7 @@ module.exports = function (app) {
     self.signin = function (user) {
       var defer = $q.defer();
 
-      $http.get(constants.local + 'auth?email=' + user.email + '&password=' + user.password)
+      $http.get(constants.local + 'auth?session='+ sessionService.sessionUser() + '&email=' + user.email + '&password=' + user.password)
         .then(function () {
           sessionService.saveUser(user);
           defer.resolve(user);
@@ -1619,8 +1634,6 @@ module.exports = function (app) {
       var self = this;
       self.signup = function (user) {
         var defer = $q.defer();
-
-        if (!sessionService.isValidCredentials(user)) defer.reject();
 
         $http.post(constants.local + 'auth', user).then(function (res) {
           defer.resolve(res)
