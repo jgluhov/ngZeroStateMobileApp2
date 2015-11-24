@@ -1,9 +1,9 @@
 .offcanvas.uk-height-1-1
-  p.uk-panel.uk-panel-box.uk-panel-box-primary(ng-bind='user.email', ng-show='user')
-
+  .uk-panel.uk-panel-box.uk-panel-box-primary(ng-show='user')
+    p(ng-bind='user.email')
   ul.uk-nav.uk-nav-offcanvas
-    li: a(ui-sref='home') Home
-    li: a(ui-sref='signin', ng-show='!user') Signin
-    li: a(ui-sref='signup', ng-show='!user') Signup
-    li: a(ui-sref='signout', ng-show='user') Signout
+    li: a(ui-sref='home' snap-close) Home
+    li: a(ui-sref='signin', ng-show='!user' snap-close) Signin
+    li: a(ui-sref='signup', ng-show='!user' snap-close) Signup
+    li: a(ng-click='signout()', ng-show='user' snap-close) Signout
 

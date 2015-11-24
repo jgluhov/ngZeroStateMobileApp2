@@ -17,9 +17,6 @@ module.exports = function(app) {
             templateUrl: "templates/signup.html",
             controller: "signupController"
           })
-          .state("signout", {
-            controller: "signoutController"
-          })
       }
     ]
   );

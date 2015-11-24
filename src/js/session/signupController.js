@@ -1,17 +1,19 @@
 module.exports = function (app) {
-  app.controller('signupController', ['$scope', 'signupService', function ($scope, signupService) {
+  app.controller('signupController', ['$scope', '$state', 'signupService', function ($scope, $state, signupService) {
+    $scope.submitted = false;
 
-
-    $scope.signup = function (user) {
+    $scope.submit = function (user, form) {
+      if(form.$invalid) {
+        $scope.submitted = true;
+        return;
+      }
       signupService.signup(user)
         .then(function (res) {
-          console.log(res);
+          $state.go('home');
         }).catch(function () {
         console.log('Something went wrong!');
       });
     };
-
-    console.log('HelloSignupController');
 
   }]);
 };
