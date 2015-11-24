@@ -19,7 +19,9 @@
     "angular-snap": "~1.8.5",
     "uikit": "~2.23.0",
     "bower": "*",
-    "install": "~1.0.4"
+    "install": "~1.0.4",
+    "angular-local-storage": "~0.2.3",
+    "jquery": "~2.1.4"
   },
   "devDependencies": {
     "lodash": "~3.10.1"

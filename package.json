@@ -28,11 +28,13 @@
     "gulp-sourcemaps": "^1.6.0",
     "gulp-stylus": "^2.1.0",
     "gulp-uglify": "^1.5.1",
-    "kouto-swiss": "^0.11.13"
+    "kouto-swiss": "^0.11.13",
+    "weinre": "^2.0.0-pre-I0Z7U9OV"
   },
   "dependencies": {
     "browser-sync": "^2.10.0",
     "cheerio": "^0.19.0",
+    "cordova-serve": "^1.0.0",
     "csp-parse": "0.0.2",
     "elementtree": "^0.1.6",
     "glob": "^6.0.1",

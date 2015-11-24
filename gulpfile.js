@@ -17,7 +17,9 @@ gulp.task('vendor:js', function() {
     './bower_components/angular-ui-router/release/angular-ui-router.min.js',
     './bower_components/snapjs/snap.min.js',
     './bower_components/angular-snap/angular-snap.min.js',
-    './bower_components/lodash/lodash.min.js'
+    './bower_components/lodash/lodash.min.js',
+    './bower_components/angular-local-storage/dist/angular-local-storage.min.js',
+    './bower_components/jquery/dist/jquery.min.js'
   ])
     .pipe(concat('vendor.min.js'))
     .pipe(gulp.dest('./www/js'))
@@ -40,7 +42,7 @@ gulp.task('templates', function() {
 });
 
 gulp.task('scripts', function() {
-  gulp.src('./src/js/*.js')
+  gulp.src('./src/js/ngZeroStateMobileApp.js')
     .pipe(plumber())
     .pipe(browserify({ insertGlobals : true }))
     .pipe(concat('app.js'))
@@ -49,7 +51,7 @@ gulp.task('scripts', function() {
     .pipe(uglify())
     .pipe(rename('app.min.js'))
     .pipe(sourcemaps.write())
-    .pipe(gulp.dest('./www/js'))
+    .pipe(gulp.dest('./www/js'));
 });
 
 gulp.task('vendor:fonts', function() {

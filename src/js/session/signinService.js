@@ -9,6 +9,7 @@ module.exports = function (app) {
 
       $http.get(constants.local + 'auth?email=' + user.email + '&password=' + user.password)
         .then(function () {
+          sessionService.saveUser(user);
           defer.resolve(user);
         }).catch(function(err) {
           defer.reject(err);

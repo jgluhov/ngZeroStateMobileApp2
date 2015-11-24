@@ -7,35 +7,35 @@
         "files": {}
     },
     "installed_plugins": {
-        "cordova-plugin-whitelist": {
+        "cordova-plugin-browsersync": {
             "PACKAGE_NAME": "io.cordova.hellocordova"
         },
-        "cordova-plugin-browsersync": {
+        "cordova-plugin-keyboard": {
             "PACKAGE_NAME": "io.cordova.hellocordova"
         },
         "cordova-plugin-screen-orientation": {
             "PACKAGE_NAME": "io.cordova.hellocordova"
         },
-        "cordova-plugin-keyboard": {
+        "cordova-plugin-whitelist": {
             "PACKAGE_NAME": "io.cordova.hellocordova"
         }
     },
     "dependent_plugins": {},
     "modules": [
         {
-            "file": "plugins/cordova-plugin-screen-orientation/www/screenorientation.js",
-            "id": "cordova-plugin-screen-orientation.screenorientation",
-            "pluginId": "cordova-plugin-screen-orientation",
-            "clobbers": [
-                "cordova.plugins.screenorientation"
-            ]
-        },
-        {
             "file": "plugins/cordova-plugin-keyboard/www/keyboard.js",
             "id": "cordova-plugin-keyboard.keyboard",
             "pluginId": "cordova-plugin-keyboard",
             "clobbers": [
                 "window.Keyboard"
+            ]
+        },
+        {
+            "file": "plugins/cordova-plugin-screen-orientation/www/screenorientation.js",
+            "id": "cordova-plugin-screen-orientation.screenorientation",
+            "pluginId": "cordova-plugin-screen-orientation",
+            "clobbers": [
+                "cordova.plugins.screenorientation"
             ]
         }
     ]

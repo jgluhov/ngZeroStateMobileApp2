@@ -1,11 +1,19 @@
 module.exports = function (home) {
-  home.controller('homeController', ['$scope', '$rootScope', 'cordovaService','sessionService', function ($scope, $rootScope, cordovaService, sessionService) {
-    cordovaService.ready.then(function () {
-      if(_.isUndefined($rootScope.user)) {
-        sessionService.isAuthorized().then(function(res) {
-          $scope.user = $rootScope.user = res.data;
-        })
+  home.controller('homeController', ['$scope', '$rootScope', 'sessionService',
+    function ($scope, $rootScope, sessionService) {
+
+
+      if (sessionService.isAuthorized()) {
+        $rootScope.user = sessionService.currentUser();
       }
-    });
-  }]);
+
+      $rootScope.signout = function () {
+        sessionService.removeUser();
+      };
+
+      $scope.test = function () {
+        sessionService.test()
+      }
+
+    }]);
 };
