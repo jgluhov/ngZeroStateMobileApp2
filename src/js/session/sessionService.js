@@ -1,43 +1,47 @@
 'use strict';
 
 module.exports = function (app) {
-  app.service('sessionService', ['$http', 'commonConstants', 'localStorageService',
-    function ($http, commonConstants, localStorageService) {
+  app.service('sessionService', ['$http', '$rootScope','commonConstants', 'localStorageService',
+    function ($http, $rootScope, commonConstants, localStorageService) {
       var self = this;
 
-      self.isAuthorized = function () {
-        return !_.isNull(localStorageService.get('email'))
+      self.authorize = function () {
+        if(_.isNull(localStorageService.get('sessionId'))) return;
+
+        $http.get(commonConstants.production + 'auth?sessionId=' + self.sessionUser() + '&token=' + commonConstants.token).then(function(res) {
+          self.saveUser(res.data);
+          $rootScope.user = self.getCurrentUser();
+          console.log($rootScope.user)
+        });
       };
 
       self.saveUser = function (user) {
         localStorageService.set('email', user.email);
         localStorageService.set('status', !_.isUndefined(user.confirmedEmail));
-        localStorageService.set('session', user.sessionId);
+        localStorageService.set('sessionId', user.sessionId);
       };
 
-      self.currentUser = function () {
+      self.getCurrentUser = function () {
         return {
           email: localStorageService.get('email'),
           status: localStorageService.get('status'),
-          session: localStorageService.set('session')
+          session: localStorageService.get('sessionId')
         }
       };
 
-      self.removeUser = function () {
-        $http.delete(commonConstants.local + 'auth?session=' + localStorageService.get('session')).then(function() {
+      self.removeCurrentUser = function () {
+        $http.delete(commonConstants.production + 'auth?sessionId=' + self.sessionUser() + '&token=' + commonConstants.token).then(function() {
           localStorageService.remove('email');
           localStorageService.remove('status');
-          localStorageService.remove('session');
+          localStorageService.remove('sessionId');
+          $rootScope.user = null;
         })
       };
 
+
       self.sessionUser = function() {
-        var id = localStorageService.get('session');
+        var id = localStorageService.get('sessionId');
         return _.isNull(id) ? '' : id;
       };
-
-      self.test = function () {
-        $http.get(commonConstants.local + 'auth?session=' + self.sessionUser())
-      }
     }])
 };

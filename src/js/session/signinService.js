@@ -1,15 +1,15 @@
 'use strict';
 
 module.exports = function (app) {
-  app.service('signinService', ['$http', '$q','commonConstants','sessionService', function ($http, $q, constants, sessionService) {
+  app.service('signinService', ['$http', '$q','commonConstants','sessionService', function ($http, $q, commonConstants, sessionService) {
     var self = this;
 
     self.signin = function (user) {
       var defer = $q.defer();
 
-      $http.get(constants.local + 'auth?session='+ sessionService.sessionUser() + '&email=' + user.email + '&password=' + user.password)
-        .then(function () {
-          sessionService.saveUser(user);
+      $http.get(commonConstants.production + 'auth?session='+ sessionService.sessionUser() + '&token=' + commonConstants.token + '&email=' + user.email + '&password=' + user.password)
+        .then(function (res) {
+          sessionService.saveUser(res.data);
           defer.resolve(user);
         }).catch(function(err) {
           defer.reject(err);

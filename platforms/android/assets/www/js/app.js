@@ -1396,6 +1396,17 @@ process.chdir = function (dir) {
 }).call(this,require("oMfpAn"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/../../node_modules/gulp-browserify/node_modules/browserify/node_modules/process/browser.js","/../../node_modules/gulp-browserify/node_modules/browserify/node_modules/process")
 },{"buffer":1,"oMfpAn":4}],5:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
+module.exports = function (app) {
+  app.config(['snapRemoteProvider', function (snapRemoteProvider) {
+    snapRemoteProvider.globalOptions = {
+      disable: 'right',
+      tapToClose: true
+    };
+  }])
+};
+}).call(this,require("oMfpAn"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/config/index.js","/config")
+},{"buffer":1,"oMfpAn":4}],6:[function(require,module,exports){
+(function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
 module.exports = function(app) {
   app.constant('commonConstants', {
     local: 'http://192.168.0.120:8011/',
@@ -1404,7 +1415,7 @@ module.exports = function(app) {
   })
 };
 }).call(this,require("oMfpAn"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/constants/commonConstants.js","/constants")
-},{"buffer":1,"oMfpAn":4}],6:[function(require,module,exports){
+},{"buffer":1,"oMfpAn":4}],7:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
 var constants = angular.module('zsConstants',[]);
 
@@ -1413,7 +1424,7 @@ require('./commonConstants')(constants);
 module.exports = constants;
 
 }).call(this,require("oMfpAn"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/constants/index.js","/constants")
-},{"./commonConstants":5,"buffer":1,"oMfpAn":4}],7:[function(require,module,exports){
+},{"./commonConstants":6,"buffer":1,"oMfpAn":4}],8:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
 'use strict';
 
@@ -1424,21 +1435,20 @@ require('./home');
 var app = angular.module('ngZeroStateMobileApp', ['ui.router','snap','zsSession', 'zsHome']);
 
 require('./routes')(app);
+require('./config')(app);
 
 
-}).call(this,require("oMfpAn"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/fake_fbd1c8a.js","/")
-},{"./constants":6,"./home":9,"./routes":10,"./session":11,"buffer":1,"oMfpAn":4}],8:[function(require,module,exports){
+}).call(this,require("oMfpAn"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/fake_da9da03.js","/")
+},{"./config":5,"./constants":7,"./home":10,"./routes":11,"./session":12,"buffer":1,"oMfpAn":4}],9:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
 module.exports = function (home) {
-  home.controller('homeController', ['$scope', '$rootScope', 'sessionService',
-    function ($scope, $rootScope, sessionService) {
+  home.controller('homeController', ['$scope', '$rootScope', 'sessionService','localStorageService',
+    function ($scope, $rootScope, sessionService, localStorageService) {
 
-      if (sessionService.isAuthorized()) {
-        $rootScope.user = sessionService.currentUser();
-      }
+      sessionService.authorize();
 
-      $rootScope.signout = function () {
-        sessionService.removeUser();
+      $rootScope.signout = function() {
+        sessionService.removeCurrentUser();
       };
 
       $scope.test = function () {
@@ -1449,7 +1459,7 @@ module.exports = function (home) {
 };
 
 }).call(this,require("oMfpAn"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/home/homeController.js","/home")
-},{"buffer":1,"oMfpAn":4}],9:[function(require,module,exports){
+},{"buffer":1,"oMfpAn":4}],10:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
 var home = angular.module('zsHome',[]);
 
@@ -1458,7 +1468,7 @@ require('./homeController')(home);
 module.exports = home;
 
 }).call(this,require("oMfpAn"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/home/index.js","/home")
-},{"./homeController":8,"buffer":1,"oMfpAn":4}],10:[function(require,module,exports){
+},{"./homeController":9,"buffer":1,"oMfpAn":4}],11:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
 module.exports = function(app) {
   app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
@@ -1479,15 +1489,12 @@ module.exports = function(app) {
             templateUrl: "templates/signup.html",
             controller: "signupController"
           })
-          .state("signout", {
-            controller: "signoutController"
-          })
       }
     ]
   );
 };
 }).call(this,require("oMfpAn"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/routes/index.js","/routes")
-},{"buffer":1,"oMfpAn":4}],11:[function(require,module,exports){
+},{"buffer":1,"oMfpAn":4}],12:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
 var session = angular.module('zsSession',['zsConstants','LocalStorageModule']);
 
@@ -1496,89 +1503,101 @@ require('./signinService')(session);
 require('./signinController')(session);
 require('./signupService')(session);
 require('./signupController')(session);
-require('./signoutController')(session);
 
 module.exports = session;
 }).call(this,require("oMfpAn"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/session/index.js","/session")
-},{"./sessionService":12,"./signinController":13,"./signinService":14,"./signoutController":15,"./signupController":16,"./signupService":17,"buffer":1,"oMfpAn":4}],12:[function(require,module,exports){
+},{"./sessionService":13,"./signinController":14,"./signinService":15,"./signupController":16,"./signupService":17,"buffer":1,"oMfpAn":4}],13:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
 'use strict';
 
 module.exports = function (app) {
-  app.service('sessionService', ['$http', 'commonConstants', 'localStorageService',
-    function ($http, commonConstants, localStorageService) {
+  app.service('sessionService', ['$http', '$rootScope','commonConstants', 'localStorageService',
+    function ($http, $rootScope, commonConstants, localStorageService) {
       var self = this;
 
-      self.isAuthorized = function () {
-        return !_.isNull(localStorageService.get('email'))
+      self.authorize = function () {
+        if(_.isNull(localStorageService.get('sessionId'))) return;
+
+        $http.get(commonConstants.production + 'auth?sessionId=' + self.sessionUser() + '&token=' + commonConstants.token).then(function(res) {
+          self.saveUser(res.data);
+          $rootScope.user = self.getCurrentUser();
+          console.log($rootScope.user)
+        });
       };
 
       self.saveUser = function (user) {
         localStorageService.set('email', user.email);
         localStorageService.set('status', !_.isUndefined(user.confirmedEmail));
-        localStorageService.set('session', user.sessionId);
+        localStorageService.set('sessionId', user.sessionId);
       };
 
-      self.currentUser = function () {
+      self.getCurrentUser = function () {
         return {
           email: localStorageService.get('email'),
           status: localStorageService.get('status'),
-          session: localStorageService.set('session')
+          session: localStorageService.get('sessionId')
         }
       };
 
-      self.removeUser = function () {
-        $http.delete(commonConstants.local + 'auth?session=' + localStorageService.get('session')).then(function() {
+      self.removeCurrentUser = function () {
+        $http.delete(commonConstants.production + 'auth?sessionId=' + self.sessionUser() + '&token=' + commonConstants.token).then(function() {
           localStorageService.remove('email');
           localStorageService.remove('status');
-          localStorageService.remove('session');
+          localStorageService.remove('sessionId');
+          $rootScope.user = null;
         })
       };
 
+
       self.sessionUser = function() {
-        var id = localStorageService.get('session');
+        var id = localStorageService.get('sessionId');
         return _.isNull(id) ? '' : id;
       };
-
-      self.test = function () {
-        $http.get(commonConstants.local + 'auth?session=' + self.sessionUser())
-      }
     }])
 };
 
 }).call(this,require("oMfpAn"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/session/sessionService.js","/session")
-},{"buffer":1,"oMfpAn":4}],13:[function(require,module,exports){
+},{"buffer":1,"oMfpAn":4}],14:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
 'use strict';
 
 module.exports = function (app) {
   app.controller('signinController', ['$scope', '$state', 'signinService',
     function ($scope, $state, signinService) {
-      $scope.signin = function (user) {
+      $scope.submitted = false;
+
+      $scope.submit = function (user, form) {
+        if(form.$invalid) {
+          $scope.submitted = true;
+          return;
+        }
+
         signinService.signin(user)
-          .then(function (res) {
+          .then(function () {
             $state.go('home');
-          }).catch(function (err) {
-        });
+          })
+          .catch(function (err) {
+
+          });
       };
     }]);
 };
 
 }).call(this,require("oMfpAn"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/session/signinController.js","/session")
-},{"buffer":1,"oMfpAn":4}],14:[function(require,module,exports){
+},{"buffer":1,"oMfpAn":4}],15:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
 'use strict';
 
 module.exports = function (app) {
-  app.service('signinService', ['$http', '$q','commonConstants','sessionService', function ($http, $q, constants, sessionService) {
+  app.service('signinService', ['$http', '$q','commonConstants','sessionService', function ($http, $q, commonConstants, sessionService) {
     var self = this;
 
     self.signin = function (user) {
       var defer = $q.defer();
 
-      $http.get(constants.local + 'auth?session='+ sessionService.sessionUser() + '&email=' + user.email + '&password=' + user.password)
-        .then(function () {
-          sessionService.saveUser(user);
+      $http.get(commonConstants.production + 'auth?session='+ sessionService.sessionUser() + '&token=' + commonConstants.token + '&email=' + user.email + '&password=' + user.password)
+        .then(function (res) {
+          sessionService.saveUser(res.data);
           defer.resolve(user);
         }).catch(function(err) {
           defer.reject(err);
@@ -1591,34 +1610,24 @@ module.exports = function (app) {
 };
 
 }).call(this,require("oMfpAn"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/session/signinService.js","/session")
-},{"buffer":1,"oMfpAn":4}],15:[function(require,module,exports){
-(function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
-'use strict';
-
-module.exports = function (app) {
-  app.controller('signoutController', ['$state','sessionService', function ($state, sessionService) {
-    sessionService.removeUser();
-    $state.go('home');
-  }])
-};
-
-}).call(this,require("oMfpAn"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/session/signoutController.js","/session")
 },{"buffer":1,"oMfpAn":4}],16:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
 module.exports = function (app) {
-  app.controller('signupController', ['$scope', 'signupService', function ($scope, signupService) {
+  app.controller('signupController', ['$scope', '$state', 'signupService', function ($scope, $state, signupService) {
+    $scope.submitted = false;
 
-
-    $scope.signup = function (user) {
+    $scope.submit = function (user, form) {
+      if(form.$invalid) {
+        $scope.submitted = true;
+        return;
+      }
       signupService.signup(user)
         .then(function (res) {
-          console.log(res);
+          $state.go('home');
         }).catch(function () {
         console.log('Something went wrong!');
       });
     };
-
-    console.log('HelloSignupController');
 
   }]);
 };
@@ -1630,13 +1639,14 @@ module.exports = function (app) {
 
 module.exports = function (app) {
   app.service('signupService', ['$http', '$q', 'commonConstants', 'sessionService',
-    function ($http, $q, constants, sessionService) {
+    function ($http, $q, commonConstants, sessionService) {
       var self = this;
       self.signup = function (user) {
         var defer = $q.defer();
 
-        $http.post(constants.local + 'auth', user).then(function (res) {
-          defer.resolve(res)
+        $http.post(commonConstants.production + 'auth?token=' + commonConstants.token, user).then(function (res) {
+          defer.resolve(res);
+          sessionService.saveUser(res.data);
         }).catch(function (err) {
           defer.reject(err)
         });
@@ -1647,4 +1657,4 @@ module.exports = function (app) {
 };
 
 }).call(this,require("oMfpAn"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/session/signupService.js","/session")
-},{"buffer":1,"oMfpAn":4}]},{},[7])
+},{"buffer":1,"oMfpAn":4}]},{},[8])

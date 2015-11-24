@@ -3,12 +3,21 @@
 module.exports = function (app) {
   app.controller('signinController', ['$scope', '$state', 'signinService',
     function ($scope, $state, signinService) {
-      $scope.signin = function (user) {
+      $scope.submitted = false;
+
+      $scope.submit = function (user, form) {
+        if(form.$invalid) {
+          $scope.submitted = true;
+          return;
+        }
+
         signinService.signin(user)
-          .then(function (res) {
+          .then(function () {
             $state.go('home');
-          }).catch(function (err) {
-        });
+          })
+          .catch(function (err) {
+
+          });
       };
     }]);
 };

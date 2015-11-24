@@ -1,13 +1,11 @@
 module.exports = function (home) {
-  home.controller('homeController', ['$scope', '$rootScope', 'sessionService',
-    function ($scope, $rootScope, sessionService) {
+  home.controller('homeController', ['$scope', '$rootScope', 'sessionService','localStorageService',
+    function ($scope, $rootScope, sessionService, localStorageService) {
 
-      if (sessionService.isAuthorized()) {
-        $rootScope.user = sessionService.currentUser();
-      }
+      sessionService.authorize();
 
-      $rootScope.signout = function () {
-        sessionService.removeUser();
+      $rootScope.signout = function() {
+        sessionService.removeCurrentUser();
       };
 
       $scope.test = function () {
