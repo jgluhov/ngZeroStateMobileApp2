@@ -10,7 +10,7 @@ snap-content, snap-drawer
 body
   font-family 'Ubuntu', sans-serif !important
   background-color #333
-  color #ffffff
+  color text-color
   -webkit-touch-callout: none; /* prevent callout to copy image, etc when tap to hold */
   -webkit-text-size-adjust: none; /* prevent webkit from resizing text to fit */
   -webkit-user-select: none;
@@ -30,4 +30,10 @@ a
   &:hover
     text-decoration: none;
     color #7acee8
+
+a.transparent
+  color text-color
+  &:hover
+    color text-color
+    text-decoration: none;
 

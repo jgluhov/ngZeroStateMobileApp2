@@ -167,6 +167,13 @@ a:hover {
   text-decoration: none;
   color: #7acee8;
 }
+a.transparent {
+  color: #fff;
+}
+a.transparent:hover {
+  color: #fff;
+  text-decoration: none;
+}
 .offcanvas {
   background-color: #333;
 }
