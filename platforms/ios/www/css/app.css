@@ -144,17 +144,17 @@ body {
   font-family: 'Ubuntu', sans-serif !important;
   background-color: #333;
   color: #fff;
-  -webkit-touch-callout: none; /* prevent callout to copy image, etc when tap to hold */
-  -webkit-text-size-adjust: none; /* prevent webkit from resizing text to fit */
+  -webkit-touch-callout: none /* prevent callout to copy image, etc when tap to hold */;
+  -webkit-text-size-adjust: none /* prevent webkit from resizing text to fit */;
   -webkit-user-select: none;
 }
 .snap-content {
-  background: #4b6a7a;
-  background-image: -webkit-radial-gradient(ellipse at center,rgba(0,183,234,0.7) 0%,#54778a 100%);
-  background-image: -moz-radial-gradient(ellipse at center,rgba(0,183,234,0.7) 0%,#54778a 100%);
-  background-image: -ms-radial-gradient(ellipse at center,rgba(0,183,234,0.7) 0%,#54778a 100%);
-  background-image: -o-radial-gradient(ellipse at center,rgba(0,183,234,0.7) 0%,#54778a 100%);
-  background-image: radial-gradient(ellipse at center,rgba(0,183,234,0.7) 0%,#54778a 100%);
+  background: #fff;
+  background-image: -webkit-radial-gradient(ellipse at center,rgba(81,91,98,0.7) 0%,#505b62 100%);
+  background-image: -moz-radial-gradient(ellipse at center,rgba(81,91,98,0.7) 0%,#505b62 100%);
+  background-image: -ms-radial-gradient(ellipse at center,rgba(81,91,98,0.7) 0%,#505b62 100%);
+  background-image: -o-radial-gradient(ellipse at center,rgba(81,91,98,0.7) 0%,#505b62 100%);
+  background-image: radial-gradient(ellipse at center,rgba(81,91,98,0.7) 0%,#505b62 100%);
 }
 h1 {
   color: #fff;

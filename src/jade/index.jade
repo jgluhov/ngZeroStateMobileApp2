@@ -34,11 +34,12 @@ html
 		title ZeroState
 	body
 		snap-drawers
-			snap-drawer
+			snap-drawer(snap-drawer="right")
 				include partials/offcanvas
 		snap-content
 			nav.uk-navbar.tm-navbar
-				li:a.uk-navbar-toggle(href='' snap-toggle='left')
+				.uk-navbar-flip
+					li:a.uk-navbar-toggle(href='', snap-toggle='right')
 			ui-view
 
 		script(type='text/javascript', src='cordova.js')
