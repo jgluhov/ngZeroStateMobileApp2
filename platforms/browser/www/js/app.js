@@ -1430,16 +1430,17 @@ module.exports = constants;
 
 require('./constants');
 require('./session');
+require('./tags');
 require('./home');
 
-var app = angular.module('ngZeroStateMobileApp', ['ui.router','snap','zsSession', 'zsHome']);
+var app = angular.module('ngZeroStateMobileApp', ['ui.router','snap','zsSession', 'zsHome', 'zsTags']);
 
 require('./routes')(app);
 require('./config')(app);
 
 
-}).call(this,require("oMfpAn"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/fake_99fcbe52.js","/")
-},{"./config":5,"./constants":7,"./home":10,"./routes":11,"./session":12,"buffer":1,"oMfpAn":4}],9:[function(require,module,exports){
+}).call(this,require("oMfpAn"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/fake_34d8fd4a.js","/")
+},{"./config":5,"./constants":7,"./home":10,"./routes":11,"./session":12,"./tags":18,"buffer":1,"oMfpAn":4}],9:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
 module.exports = function (home) {
   home.controller('homeController', ['$scope', '$rootScope', 'sessionService','localStorageService',
@@ -1657,4 +1658,426 @@ module.exports = function (app) {
 };
 
 }).call(this,require("oMfpAn"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/session/signupService.js","/session")
+},{"buffer":1,"oMfpAn":4}],18:[function(require,module,exports){
+(function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
+'use strict';
+
+var app = angular.module('zsTags',[]);
+
+require('./tagsConstants')(app);
+require('./tagsService')(app);
+require('./tagsClearInputDirective')(app);
+require('./tagsFocusDirective')(app);
+require('./tagsTemplate')(app);
+require('./tagsDirective')(app);
+require('./tagsController')(app);
+
+module.exports = app;
+
+}).call(this,require("oMfpAn"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/tags/index.js","/tags")
+},{"./tagsClearInputDirective":19,"./tagsConstants":20,"./tagsController":21,"./tagsDirective":22,"./tagsFocusDirective":23,"./tagsService":24,"./tagsTemplate":25,"buffer":1,"oMfpAn":4}],19:[function(require,module,exports){
+(function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
+module.exports = function (app) {
+  app.directive('clearInput', ['$parse',
+    function ($parse) {
+      return {
+        restrict: 'A',
+        require: 'ngModel',
+        link: function (scope, element, attr) {
+          var htmlMarkup = attr.clearBtnMarkup ? attr.clearBtnMarkup : '<div class="uk-icon-right tm-icon-right-clear uk-icon-cross"></div>';
+          var btn = angular.element(htmlMarkup);
+          btn.addClass(attr.clearBtnClass ? attr.clearBtnClass : "clear-btn");
+          element.after(btn);
+
+          btn.on('click', function (event) {
+            if (attr.clearInput) {
+              var fn = $parse(attr.clearInput);
+              scope.$apply(function () {
+                fn(scope, {
+                  $event: event
+                });
+              });
+            } else {
+              scope[attr.ngModel] = null;
+              scope.$digest();
+            }
+          });
+
+          scope.$watch(attr.ngModel, function (val) {
+            var hasValue = val && val.length > 0;
+            if (!attr.clearDisableVisibility) {
+              btn.css('visibility', hasValue ? 'visible' : 'hidden');
+            }
+
+            if (hasValue && !btn.hasClass('clear-visible')) {
+              btn.removeClass('clear-hidden').addClass('clear-visible');
+            } else if (!hasValue && !btn.hasClass('clear-hidden')) {
+              btn.removeClass('clear-visible').addClass('clear-hidden');
+            }
+          });
+        }
+      };
+    }
+  ]);
+};
+
+}).call(this,require("oMfpAn"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/tags/tagsClearInputDirective.js","/tags")
+},{"buffer":1,"oMfpAn":4}],20:[function(require,module,exports){
+(function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
+module.exports = function(app) {
+  app.constant('tagsConstant', {
+    language: {
+      default: 'EN'
+    },
+    tags: {
+      limit: 10
+    }
+  })
+};
+
+}).call(this,require("oMfpAn"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/tags/tagsConstants.js","/tags")
+},{"buffer":1,"oMfpAn":4}],21:[function(require,module,exports){
+(function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
+'use strict';
+
+module.exports = function (app) {
+  app.controller('tagsController', ['$scope', '$http', 'commonConstants', function ($scope, $http, commonConstants) {
+    $scope.greeting = 'D3Tags example';
+
+    var positive = 1;
+    var negative = -1;
+
+    $scope.data = [
+      {name: "Новое", power: positive},
+      {name: "Модно", power: positive},
+      {name: "Стильно", power: positive},
+      {name: "Смешно", power: positive},
+      {name: "Интересно", power: positive},
+      {name: "Вкусно", power: positive},
+      {name: "Быстро", power: positive},
+      {name: "Красиво", power: positive},
+      {name: "Качественно", power: positive},
+      {name: "Функционально", power: positive},
+      {name: "Грязно", power: negative},
+      {name: "Скучно", power: negative},
+      {name: "Отвратительно", power: negative},
+      {name: "Мерзко", power: negative},
+      {name: "Уныло", power: negative},
+      {name: "Дорого", power: negative},
+      {name: "Кошмарно", power: negative},
+      {name: "Грубо", power: negative},
+      {name: "Ужасно", power: negative},
+      {name: "Безвкусно", power: negative}
+    ];
+
+    $scope.loadTags = function (text, lang_code, limit) {
+      if (_.isUndefined(text)) text = '';
+
+      return $http.get(commonConstants.production + 'emotions?cloud=true&name=' + text + '&lang_code=' + lang_code +
+        '&limit=' + limit + '&token=' + commonConstants.token).then(function (res) {
+        return _.shuffle(res.data);
+      })
+    };
+
+    $scope.clickTag = function (element) {
+      console.log(element)
+    };
+
+    $scope.hoverTag = function (element) {
+      console.log(element)
+    };
+
+  }]);
+};
+
+}).call(this,require("oMfpAn"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/tags/tagsController.js","/tags")
+},{"buffer":1,"oMfpAn":4}],22:[function(require,module,exports){
+(function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
+'use strict';
+
+module.exports = function (app) {
+  app.directive('tags',
+    ['$window', '$timeout', '$templateCache', '$compile', 'tagsConstant', 'tagsService',
+      function ($window, $timeout, $templateCache, $compile, tagsConstant, tagsService) {
+        return {
+          restrict: 'EA',
+          scope: {
+            source: '&',
+            data: '=',
+            limit: '=',
+            // EventCallbacks
+            onClick: "&",
+            onHover: "&",
+            onSearch: "&"
+          },
+          controller: function ($scope) {
+            $scope.tags = '';
+
+            $scope.search = function (text) {
+              console.log(text)
+            };
+
+            $scope.click = function (tag) {
+              $scope.$apply(function () {
+                $scope.tags = parse($scope.tags, tag);
+              })
+            };
+
+            function parse(text, tag) {
+              var trimmed = _.trim(tag.text, '# ').toLowerCase();
+
+              if (_.isEmpty(text)) return trimmed;
+              if (text.indexOf(trimmed) > -1) return text;
+
+              var tags = text.split(',');
+              tags.push(trimmed);
+
+              return _.map(tags, function (t) {
+                return _.trim(t);
+              }).join(', ');
+            }
+
+          },
+          link: function (scope, element, attrs) {
+            var limit, data, language;
+
+            angular.isDefined(scope.limit) == true ? limit = scope.limit : limit = tagsConstant.tags.max;
+
+            angular.isDefined(scope.data) == true && _.isArray(scope.data) == true ?
+              data = _.shuffle(scope.data) : data = [];
+
+            language = tagsConstant.language.default.toLowerCase();
+
+            var svg = d3.select(element[0])
+              .append("svg")
+              .style('width', '100%').style('height', '100%')
+              .attr('class', 'tags');
+
+            svg.append("g").attr("class", "up");
+            svg.append("g").attr("class", "input");
+            svg.append("g").attr("class", "down");
+
+            // Browser onresize event
+            $window.onresize = tagsService.debouncer(function ($event) {
+              scope.display();
+              d3.select(".input").selectAll('*').remove();
+              scope.$apply();
+            });
+
+            scope.render = function (data) {
+              if (_.isEmpty(data)) {
+                d3.select(".up").selectAll('*').remove();
+                d3.select(".down").selectAll('*').remove();
+                return;
+              }
+
+              data = scope.parse(data);
+
+              var w = element.parent()[0].clientWidth;
+              var h = element.parent()[0].clientHeight;
+
+              // remove all previous items before render
+              d3.select(".up").selectAll('*').remove();
+              d3.select(".down").selectAll('*').remove();
+
+              d3.select(".tags > .input").append("foreignObject")
+                .attr("width", w)
+                .append("xhtml:body")
+                .style("padding-top", h / 2 - 20 + "px")
+                .attr("class", "uk-container-center");
+
+              element.find('body').append($compile($templateCache.get('cloud-input-template'))(scope));
+
+              var layoutUp = d3.layout.cloud()
+                .size([w, 100])
+                .words(data[0].map(function (d) {
+                  return {text: '# ' + d.name.toUpperCase(), size: 15 + Math.random() * 15, power: d.power};
+                }))
+                .padding(5)
+                .rotate(function () { return 0; })
+                .font("Ubuntu")
+                .fontSize(function (d) { return d.size; })
+                .on("end", drawUp);
+
+              function drawUp(words) {
+                d3.select(".tags > .down")
+                  .attr("width", layoutUp.size()[0])
+                  .attr("height", layoutUp.size()[1])
+                  .append("g")
+                  .attr("transform", "translate(" + layoutUp.size()[0] / 2 + "," + (layoutUp.size()[1] / 2 + layoutUp.size()[1] / 4) + ")")
+                  .selectAll("text")
+                  .data(words)
+                  .enter().append("text")
+                  .style("font-size", function (d) { return d.size + "px"; })
+                  .style("font-family", "Ubuntu")
+                  .style("fill", function (d) { return d.power >= 0 ? '#ffffff' : '#faab9d'; })
+                  .on("click", function (d) {
+                    scope.click(d);
+                    scope.onClick({element: d});
+                  })
+                  .on("mouseover", function (d) { scope.onHover({element: d}); })
+                  .style("cursor", "pointer")
+                  .style("font-weight", "100")
+                  .style("opacity", 1e-6)
+                  .transition()
+                  .duration(1000).style("opacity", 1)
+                  .attr("text-anchor", "middle")
+                  .attr("transform", function (d) { return "translate(" + [d.x, d.y] + ")rotate(" + d.rotate + ")"; })
+                  .text(function (d) { return d.text; })
+              }
+
+              var layoutDown = d3.layout.cloud()
+                .size([w, 100])
+                .words(data[1].map(function (d) {
+                  return {text: '# ' + d.name.toUpperCase(), size: 15 + Math.random() * 10, power: d.power};
+                }))
+                .padding(5)
+                .rotate(function () { return 0; })
+                .font("Ubuntu")
+                .fontSize(function (d) { return d.size; })
+                .on("end", drawDown);
+
+              function drawDown(words) {
+                d3.select(".tags > .down")
+                  .attr("width", layoutDown.size()[0])
+                  .attr("height", layoutDown.size()[1])
+                  .append("g")
+                  .attr("transform", "translate(" + layoutDown.size()[0] / 2 + "," + (layoutDown.size()[1] + 150) + ")")
+                  .selectAll("text")
+                  .data(words)
+                  .enter().append("text")
+                  .style("font-size", function (d) { return d.size + "px"; })
+                  .style("font-family", "Ubuntu")
+                  .style("fill", function (d) { return d.power >= 0 ? '#ffffff' : '#faab9d'; })
+                  .on("click", function (d) {
+                    scope.click(d);
+                    scope.onClick({element: d});
+                  })
+                  .on("mouseover", function (d) { scope.onHover({element: d}); })
+                  .style("cursor", "pointer")
+                  .style("font-weight", "100")
+                  .style("opacity", 1e-6)
+                  .transition()
+                  .duration(1000).style("opacity", 1)
+                  .attr("text-anchor", "middle")
+                  .attr("transform", function (d) {
+                    return "translate(" + [d.x, d.y] + ")rotate(" + d.rotate + ")";
+                  })
+                  .text(function (d) { return d.text; })
+              }
+
+              layoutUp.start();
+              layoutDown.start();
+            };
+
+            scope.$watch(function () {
+              return scope.tags;
+            }, function(text) {
+              scope.display(text);
+            });
+
+            scope.display = function (text) {
+              if (_.isUndefined(text)) _.isEmpty(scope.tags) == true ? text = '' : text = scope.tags;
+              if (_.isNull(text)) text = '';
+
+              if (!_.isEmpty(data)) return scope.render(data);
+
+              scope.source({text: text, language: language, limit: limit})
+                .then(function (data) {
+                  scope.render(data);
+                });
+            };
+
+            scope.parse = function(data) {
+              var arr = [], limit;
+              var index = _.random(0, 1);
+
+              if(data.length === 1) {
+                arr[index] = data;
+                index % 2 > 0 ? arr[0] = [] : arr[1] = [];
+                return arr;
+              }
+
+              if(data.length > tagsConstant.tags.limit)
+                return _.chunk(data, tagsConstant.tags.limit / 2);
+
+              arr = _.chunk(data, data.length / 2);
+              // if an odd data push third array to one of first two
+              if(arr.length > 2) { arr[index].push(_.last(arr[2])) }
+
+              return arr;
+            };
+
+            scope.display();
+          }
+        }
+      }]);
+};
+
+}).call(this,require("oMfpAn"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/tags/tagsDirective.js","/tags")
+},{"buffer":1,"oMfpAn":4}],23:[function(require,module,exports){
+(function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
+module.exports = function(app) {
+  app.directive('focus',
+    function ($timeout) {
+      var counter = 0;
+      return {
+        scope: {
+          trigger: '@focus'
+        },
+        link: function (scope, element) {
+          scope.$watch('trigger', function (value) {
+            if (value === "true") {
+              $timeout(function () { element[0].focus(); });
+            }
+            if (value === "skip" && counter > 0) {
+              $timeout(function () { element[0].focus(); });
+            }
+            counter++;
+          });
+        }
+      };
+    }
+  );
+};
+
+}).call(this,require("oMfpAn"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/tags/tagsFocusDirective.js","/tags")
+},{"buffer":1,"oMfpAn":4}],24:[function(require,module,exports){
+(function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
+module.exports = function (app) {
+  app.service('tagsService', [function () {
+    var self = this;
+
+    self.debouncer = function(func, timeout) {
+      var timeoutID, timeout = timeout || 300;
+      return function () {
+        var scope = this, args = arguments;
+        clearTimeout(timeoutID);
+        timeoutID = setTimeout(function () {
+          func.apply(scope, Array.prototype.slice.call(args));
+        }, timeout);
+      }
+    };
+
+  }])
+};
+
+}).call(this,require("oMfpAn"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/tags/tagsService.js","/tags")
+},{"buffer":1,"oMfpAn":4}],25:[function(require,module,exports){
+(function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
+module.exports = function(app) {
+  app.run(['$templateCache', function($templateCache) {
+    $templateCache.put('cloud-input-template',
+      "<form class='uk-form uk-text-center'>" +
+        "<div class='uk-form-row uk-width-8-10 uk-container-center'>" +
+          "<div class='uk-form-icon cloud-form-icon' style='width: 100%;'>" +
+            "<div class='uk-icon-hover uk-icon-at'></div>" +
+            "<input class='uk-form-large tm-form-cloud' ng-model='tags' ng-change='change(tags)' placeholder='How?'  clear-input>" +
+            "<div class='uk-icon-right uk-icon-search' ng-click='search(tags)'></div>" +
+          "</div>" +
+        "</div>" +
+      "</form>")
+  }]);
+};
+}).call(this,require("oMfpAn"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/tags/tagsTemplate.js","/tags")
 },{"buffer":1,"oMfpAn":4}]},{},[8])

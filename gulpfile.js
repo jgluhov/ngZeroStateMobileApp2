@@ -18,6 +18,8 @@ gulp.task('vendor:js', function() {
     './bower_components/snapjs/snap.min.js',
     './bower_components/angular-snap/angular-snap.min.js',
     './bower_components/lodash/lodash.min.js',
+    './bower_components/d3/d3.min.js',
+    './bower_components/d3-cloud/build/d3.layout.cloud.js',
     './bower_components/angular-local-storage/dist/angular-local-storage.min.js',
     './bower_components/jquery/dist/jquery.min.js'
   ])

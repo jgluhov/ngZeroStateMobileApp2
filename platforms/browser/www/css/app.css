@@ -184,6 +184,9 @@ a.transparent:hover {
 .tm-navbar .uk-navbar-toggle {
   font-size: 24px;
   color: #fff;
+  position: absolute;
+  top: 20px;
+  right: 10px;
 }
 @font-face {
   font-family: "Ubuntu";
@@ -279,4 +282,92 @@ a.transparent:hover {
   background-image: url("../images/icons/button_vk.png");
   background-repeat: no-repeat;
   background-size: cover;
+}
+.tags-content {
+  height: 300px !important;
+}
+.cloud-form-icon {
+  width: 100%;
+}
+.cloud-form-icon .uk-icon-search {
+  cursor: pointer;
+  pointer-events: auto;
+}
+.cloud-form-icon .uk-icon-cross {
+  cursor: pointer;
+  pointer-events: auto;
+}
+.uk-form-icon input {
+  color: input-color !important;
+}
+.uk-form-icon input.tm-form-cloud {
+  position: relative;
+  width: 100%;
+  font-size: 23px;
+  font-weight: 300;
+  height: 60px !important;
+  line-height: 30px;
+}
+.uk-form-icon input.tm-form-cloud::-webkit-input-placeholder {
+  color: placeholder-color;
+}
+.uk-form-icon input.tm-form-cloud:-moz-placeholder {
+  color: placeholder-color;
+}
+.uk-form-icon input.tm-form-cloud::-moz-placeholder {
+  color: placeholder-color;
+}
+.uk-form-icon input.tm-form-cloud:-ms-input-placeholder {
+  color: placeholder-color;
+}
+.uk-form-icon input:focus {
+  background-color: #f9f9f9 !important;
+}
+.uk-form-icon input:focus::-webkit-input-placeholder {
+  color: placeholder-color;
+}
+.uk-form-icon input:focus:-moz-placeholder {
+  color: placeholder-color;
+}
+.uk-form-icon input:focus::-moz-placeholder {
+  color: placeholder-color;
+}
+.uk-form-icon input:focus:-ms-input-placeholder {
+  color: placeholder-color;
+}
+.uk-form-icon .uk-icon-right {
+  margin-left: -40px;
+  margin-top: -7px;
+  color: #6d6d6d;
+  font-size: 18px;
+}
+.uk-form-icon .uk-icon-right.tm-icon-right-clear {
+  margin-left: -70px;
+}
+.uk-form-icon.cloud-form-icon .uk-icon-at {
+  margin-top: -15px;
+  margin-left: 10px;
+}
+.uk-form-icon:not(.uk-form-icon-flip)>input {
+  padding-left: 50px !important;
+  padding-right: 70px !important;
+}
+.uk-icon-at {
+  z-index: 1;
+}
+.uk-icon-at:before {
+  content: url("../images/icons/at.png");
+}
+.uk-icon-search {
+  z-index: 1;
+  margin-top: -9px !important;
+}
+.uk-icon-search:before {
+  content: url("../images/icons/button_search.png");
+}
+.uk-icon-cross {
+  z-index: 1;
+}
+.uk-icon-cross:before {
+  content: url("../images/icons/button_clear_inputbox.png");
 }

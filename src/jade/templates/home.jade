@@ -1,1 +1,5 @@
 .uk-container.uk-container-center
+
+.tags-content(ng-controller='tagsController')
+  tags(on-click="clickTag(element)" , on-hover="hoverTag(element)", on-search="searchTag(text)",
+  source='loadTags(text, language, limit)',  limit='20')
