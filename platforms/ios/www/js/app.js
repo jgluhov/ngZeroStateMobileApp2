@@ -1439,7 +1439,7 @@ require('./routes')(app);
 require('./config')(app);
 
 
-}).call(this,require("oMfpAn"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/fake_d4fdf6de.js","/")
+}).call(this,require("oMfpAn"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/fake_9edfd907.js","/")
 },{"./config":5,"./constants":7,"./home":10,"./routes":11,"./session":12,"./tags":18,"buffer":1,"oMfpAn":4}],9:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
 module.exports = function (home) {
@@ -1667,7 +1667,6 @@ var app = angular.module('zsTags',[]);
 require('./tagsConstants')(app);
 require('./tagsService')(app);
 require('./tagsClearInputDirective')(app);
-require('./tagsFocusDirective')(app);
 require('./tagsTemplate')(app);
 require('./tagsDirective')(app);
 require('./tagsController')(app);
@@ -1675,7 +1674,7 @@ require('./tagsController')(app);
 module.exports = app;
 
 }).call(this,require("oMfpAn"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/tags/index.js","/tags")
-},{"./tagsClearInputDirective":19,"./tagsConstants":20,"./tagsController":21,"./tagsDirective":22,"./tagsFocusDirective":23,"./tagsService":24,"./tagsTemplate":25,"buffer":1,"oMfpAn":4}],19:[function(require,module,exports){
+},{"./tagsClearInputDirective":19,"./tagsConstants":20,"./tagsController":21,"./tagsDirective":22,"./tagsService":23,"./tagsTemplate":24,"buffer":1,"oMfpAn":4}],19:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
 module.exports = function (app) {
   app.directive('clearInput', ['$parse',
@@ -2024,33 +2023,6 @@ module.exports = function (app) {
 }).call(this,require("oMfpAn"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/tags/tagsDirective.js","/tags")
 },{"buffer":1,"oMfpAn":4}],23:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
-module.exports = function(app) {
-  app.directive('focus',
-    function ($timeout) {
-      var counter = 0;
-      return {
-        scope: {
-          trigger: '@focus'
-        },
-        link: function (scope, element) {
-          scope.$watch('trigger', function (value) {
-            if (value === "true") {
-              $timeout(function () { element[0].focus(); });
-            }
-            if (value === "skip" && counter > 0) {
-              $timeout(function () { element[0].focus(); });
-            }
-            counter++;
-          });
-        }
-      };
-    }
-  );
-};
-
-}).call(this,require("oMfpAn"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/tags/tagsFocusDirective.js","/tags")
-},{"buffer":1,"oMfpAn":4}],24:[function(require,module,exports){
-(function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
 module.exports = function (app) {
   app.service('tagsService', [function () {
     var self = this;
@@ -2070,7 +2042,7 @@ module.exports = function (app) {
 };
 
 }).call(this,require("oMfpAn"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/tags/tagsService.js","/tags")
-},{"buffer":1,"oMfpAn":4}],25:[function(require,module,exports){
+},{"buffer":1,"oMfpAn":4}],24:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
 module.exports = function(app) {
   app.run(['$templateCache', function($templateCache) {
