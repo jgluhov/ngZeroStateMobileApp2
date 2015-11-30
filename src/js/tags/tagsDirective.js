@@ -16,7 +16,7 @@ module.exports = function (app) {
             onSearch: "&"
           },
           controller: function ($scope) {
-            $scope.tags = '';
+            $scope.tags = undefined;
 
             $scope.search = function (text) {
               console.log(text)
@@ -32,7 +32,12 @@ module.exports = function (app) {
               var trimmed = _.trim(tag.text, '# ').toLowerCase();
 
               if (_.isEmpty(text)) return trimmed;
+
               if (text.indexOf(trimmed) > -1) return text;
+
+              if (!_.isEmpty(text)) {
+                if(trimmed.indexOf(text) > -1) return trimmed;
+              }
 
               var tags = text.split(',');
               tags.push(trimmed);
@@ -96,7 +101,7 @@ module.exports = function (app) {
               var layoutUp = d3.layout.cloud()
                 .size([w, 100])
                 .words(data[0].map(function (d) {
-                  return {text: '# ' + d.name.toUpperCase(), size: 15 + Math.random() * 15, power: d.power};
+                  return {text: '# ' + d.name.toUpperCase(), size: 15 + Math.random() * 10, power: d.power};
                 }))
                 .padding(5)
                 .rotate(function () { return 0; })
@@ -178,7 +183,9 @@ module.exports = function (app) {
             scope.$watch(function () {
               return scope.tags;
             }, function(text) {
-              scope.display(text);
+              if(!_.isUndefined(text)) {
+                scope.display(text);
+              }
             });
 
             scope.display = function (text) {
@@ -213,7 +220,7 @@ module.exports = function (app) {
               return arr;
             };
 
-            scope.display();
+            scope.display()
           }
         }
       }]);
