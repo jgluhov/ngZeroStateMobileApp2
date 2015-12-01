@@ -3,7 +3,7 @@ describe('Offcanvas', function() {
 
   it('should open browser and find itself on root', function() {
     browser.get('http://localhost:8000/');
-    expect(element(by.className('tags-content')).isDisplayed()).toBeTruthy();
+    expect(element(by.className('tags-content')).isPresent()).toBeTruthy();
   });
 
   it('should click on signin link and find itself on signin page', function() {

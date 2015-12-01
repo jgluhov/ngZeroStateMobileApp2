@@ -33,6 +33,7 @@
     "karma-chrome-launcher": "^0.2.1",
     "karma-jasmine": "^0.3.6",
     "kouto-swiss": "^0.11.13",
+    "lodash": "^3.10.1",
     "weinre": "^2.0.0-pre-I0Z7U9OV"
   },
   "dependencies": {
@@ -44,6 +45,7 @@
     "glob": "^6.0.1",
     "nopt": "^3.0.6",
     "plist": "^1.2.0",
+    "protractor": "^3.0.0",
     "q": "^1.4.1",
     "shelljs": "^0.5.3",
     "which": "^1.2.0"
