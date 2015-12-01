@@ -29,6 +29,7 @@ module.exports = function (app) {
             };
 
             function parse(text, tag) {
+              text = text.toLowerCase();
               var trimmed = _.trim(tag.text, '# ').toLowerCase();
 
               if (_.isEmpty(text)) return trimmed;

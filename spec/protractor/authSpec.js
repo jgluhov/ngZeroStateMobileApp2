@@ -1,3 +1,9 @@
+var hasClass = function (element, cls) {
+  return element.getAttribute('class').then(function (classes) {
+    return classes.split(' ').indexOf(cls) !== -1;
+  });
+};
+
 describe('Authorization', function() {
   var offcanvas = element(by.className('offcanvas'));
   var signinForm = element(by.name('signinForm'));
@@ -14,7 +20,15 @@ describe('Authorization', function() {
     expect(element(by.name('signinForm')).isDisplayed()).toBeTruthy();
   });
 
-  it('should send data to input email and password', function() {
+  it('should send invalid data (only email) and we should see error', function() {
+    signinForm.element(by.name('email')).sendKeys('jgluhov@gmail.com');
+    signinForm.element(by.buttonText('Sign In')).click();
+    expect(signinForm.element(by.name('password')));
+    expect(hasClass(element(by.name('password')), 'ng-invalid-required')).toBe(true);
+    signinForm.element(by.name('email')).sendKeys('');
+  });
+
+  it('should send valid data to input email and password', function() {
     signinForm.element(by.name('email')).sendKeys('jgluhov@gmail.com');
     signinForm.element(by.name('password')).sendKeys('Mathemat1cs');
     signinForm.element(by.buttonText('Sign In')).click();
