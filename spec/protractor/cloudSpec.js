@@ -36,28 +36,8 @@ describe('Cloud', function () {
     expect(element.all(by.tagName('text')).count()).toBe(10);
   });
 
-  it('should finish user writing after user click a tag on the cloud', function () {
-    input.sendKeys('d');
-
-    browser.driver.sleep(3000);
-
-    var tag = element.all(by.tagName('text')).first();
-    tag.click();
-
-    tag.getText().then(function (name) {
-      var name = _.trim(name, '# ').toLowerCase();
-      input.getAttribute('value').then(function (text) {
-        expect(name).toBe(text)
-      });
-    });
-
-    input.clear();
-  });
-
   it('should send key "!" and cloud should show 0 tags', function () {
     input.sendKeys('!');
     expect(element.all(by.tagName('text')).count()).toBe(0);
   });
-
-
 });

@@ -293,7 +293,8 @@ a.transparent:hover {
   cursor: pointer;
   pointer-events: auto;
 }
-.cloud-form-icon .uk-icon-cross {
+.cloud-form-icon .uk-icon-clear_inputbox {
+  margin-top: -12px !important;
   cursor: pointer;
   pointer-events: auto;
 }
@@ -303,9 +304,9 @@ a.transparent:hover {
 .uk-form-icon input.tm-form-cloud {
   position: relative;
   width: 100%;
-  font-size: 23px;
+  font-size: 20px;
   font-weight: 300;
-  height: 60px !important;
+  height: 50px !important;
   line-height: 30px;
 }
 .uk-form-icon input.tm-form-cloud::-webkit-input-placeholder {
@@ -336,38 +337,38 @@ a.transparent:hover {
   color: placeholder-color;
 }
 .uk-form-icon .uk-icon-right {
-  margin-left: -40px;
-  margin-top: -7px;
+  margin-left: -32px;
+  margin-top: -10px;
   color: #6d6d6d;
   font-size: 18px;
 }
 .uk-form-icon .uk-icon-right.tm-icon-right-clear {
-  margin-left: -70px;
+  margin-left: -50px;
 }
-.uk-form-icon.cloud-form-icon .uk-icon-at {
-  margin-top: -15px;
-  margin-left: 10px;
+.uk-form-icon.cloud-form-icon .uk-icon-hashtag {
+  margin-top: -8px;
+  margin-left: 5px;
 }
 .uk-form-icon:not(.uk-form-icon-flip)>input {
-  padding-left: 50px !important;
+  padding-left: 35px !important;
   padding-right: 70px !important;
 }
-.uk-icon-at {
+.uk-icon-hashtag {
   z-index: 1;
 }
-.uk-icon-at:before {
-  content: url("../images/icons/at.png");
+.uk-icon-hashtag:before {
+  content: url("../images/icons/hashtag/icon_hashtag@0.5x.png");
 }
 .uk-icon-search {
   z-index: 1;
   margin-top: -9px !important;
 }
 .uk-icon-search:before {
-  content: url("../images/icons/button_search.png");
+  content: url("../images/icons/buttons/search/button_search@0.5x.png");
 }
-.uk-icon-cross {
+.uk-icon-clear_inputbox {
   z-index: 1;
 }
-.uk-icon-cross:before {
-  content: url("../images/icons/button_clear_inputbox.png");
+.uk-icon-clear_inputbox:before {
+  content: url("../images/icons/buttons/clear/button_clear_inputbox@0.5x.png");
 }
