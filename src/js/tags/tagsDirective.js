@@ -97,7 +97,7 @@ module.exports = function (app) {
                 d3.select(".tags > .input").append("foreignObject")
                   .attr("width", w)
                   .append("xhtml:body")
-                  .style("padding-top", h / 2 - 55 + "px")
+                  .style("padding-top", h / 2 - 20 + "px")
                   .attr("class", "uk-container-center");
 
                 element.find('body').append($compile($templateCache.get('cloud-input-template'))(scope));

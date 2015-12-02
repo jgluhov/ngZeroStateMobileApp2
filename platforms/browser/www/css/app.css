@@ -284,7 +284,7 @@ a.transparent:hover {
   background-size: cover;
 }
 .tags-content {
-  height: 300px !important;
+  height: 230px !important;
 }
 .cloud-form-icon {
   width: 100%;
@@ -372,4 +372,23 @@ a.transparent:hover {
 }
 .uk-icon-clear_inputbox:before {
   content: url("../images/icons/buttons/clear/button_clear_inputbox@0.5x.png");
+}
+.tm-subnav .uk-subnav li {
+  width: -webkit-calc(33.333333333333336%);
+  width: calc(33.333333333333336%);
+  text-align: center;
+  background-color: #383e43;
+  height: 50px;
+  line-height: 50px;
+  text-transform: uppercase;
+}
+.tm-subnav .uk-subnav li a {
+  color: #d5d6d6 !important;
+  font-weight: 300;
+}
+.tm-subnav .uk-subnav-line >:before {
+  height: 36px;
+  margin-top: 7px;
+  float: left !important;
+  border-color: #525a61;
 }
