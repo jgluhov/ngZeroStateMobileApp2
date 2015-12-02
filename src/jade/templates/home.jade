@@ -3,3 +3,9 @@
 .tags-content(ng-controller='tagsController')
   tags(on-click="clickTag(element)" , on-hover="hoverTag(element)", on-search="searchTag(text)",
   source='loadTags(text, language, limit)',  limit='20')
+
+.tm-subnav
+  ul.uk-subnav.uk-subnav-line
+    li: a(href='#') subjects
+    li: a(href='#') actions
+    li: a(href='#') in world

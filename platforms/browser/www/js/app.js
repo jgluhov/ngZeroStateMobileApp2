@@ -1439,7 +1439,7 @@ require('./routes')(app);
 require('./config')(app);
 
 
-}).call(this,require("oMfpAn"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/fake_65f8727a.js","/")
+}).call(this,require("oMfpAn"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/fake_23ace18.js","/")
 },{"./config":5,"./constants":7,"./home":10,"./routes":11,"./session":12,"./tags":18,"buffer":1,"oMfpAn":4}],9:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
 module.exports = function (home) {
@@ -1891,7 +1891,7 @@ module.exports = function (app) {
                 d3.select(".tags > .input").append("foreignObject")
                   .attr("width", w)
                   .append("xhtml:body")
-                  .style("padding-top", h / 2 - 55 + "px")
+                  .style("padding-top", h / 2 - 20 + "px")
                   .attr("class", "uk-container-center");
 
                 element.find('body').append($compile($templateCache.get('cloud-input-template'))(scope));
