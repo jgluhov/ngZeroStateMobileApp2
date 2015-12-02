@@ -337,13 +337,14 @@ a.transparent:hover {
   color: placeholder-color;
 }
 .uk-form-icon .uk-icon-right {
-  margin-left: -32px;
+  margin-left: -28px;
   margin-top: -10px;
   color: #6d6d6d;
   font-size: 18px;
+  width: 15px;
 }
 .uk-form-icon .uk-icon-right.tm-icon-right-clear {
-  margin-left: -50px;
+  margin-left: -47px;
 }
 .uk-form-icon.cloud-form-icon .uk-icon-hashtag {
   margin-top: -8px;
