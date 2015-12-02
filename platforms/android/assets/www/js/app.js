@@ -1439,7 +1439,7 @@ require('./routes')(app);
 require('./config')(app);
 
 
-}).call(this,require("oMfpAn"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/fake_7410d0ec.js","/")
+}).call(this,require("oMfpAn"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/fake_cb7a4a59.js","/")
 },{"./config":5,"./constants":7,"./home":10,"./routes":11,"./session":12,"./tags":18,"buffer":1,"oMfpAn":4}],9:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
 module.exports = function (home) {
@@ -2062,7 +2062,7 @@ module.exports = function(app) {
         "<div class='uk-form-row uk-width-8-10 uk-container-center'>" +
           "<div class='uk-form-icon cloud-form-icon' style='width: 100%;'>" +
             "<div class='uk-icon-hover uk-icon-hashtag'></div>" +
-            "<input class='uk-form-large tm-form-cloud' ng-model='tags' ng-change='change(tags)' placeholder='How?'  clear-input>" +
+            "<input type='search' class='uk-form-large tm-form-cloud' ng-model='tags' ng-change='change(tags)' placeholder='How?'  clear-input>" +
             "<div class='uk-icon-right uk-icon-search' ng-click='search(tags)'></div>" +
           "</div>" +
         "</div>" +

@@ -392,3 +392,54 @@ a.transparent:hover {
   float: left !important;
   border-color: #525a61;
 }
+.with-border {
+  background-color: rgba(255,255,255,0.8) !important;
+  border: 2px solid #383e43;
+}
+.with-border:active {
+  background-color: rgba(139,213,222,0.8) !important;
+  color: #fff !important;
+  -webkit-transition: all 0.3s ease-in;
+  transition: all 0.3s ease-in;
+}
+.btn-state-it {
+  position: absolute;
+  bottom: 5px;
+  left: -webkit-calc(50% - 40px);
+  left: calc(50% - 40px);
+  display: block;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  margin: 0 auto;
+  padding-top: 30px;
+  width: 80%;
+  width: 80px;
+  height: 80px;
+  background: #fff /* fallback color for old browsers */;
+  background: url("../images/icons/buttons/stateit/state_it_button.png");
+  background-size: 90%;
+  background-position-y: 5px;
+  background-position-x: 5px;
+  background-repeat: no-repeat;
+  border-radius: 50%;
+  color: #383e43;
+  text-align: center;
+  text-decoration: none;
+  letter-spacing: 1px;
+  -webkit-transition: all 0.3s ease-out;
+  transition: all 0.3s ease-out;
+  text-transform: uppercase;
+  font-size: 14px;
+  font-weight: 600;
+}
+.btn-state-it:hover,
+.btn-state-it:focus,
+.btn-state-it:active {
+  color: #000;
+  -webkit-transition: all 0.1s ease-in;
+  transition: all 0.1s ease-in;
+}
+.btn-state-it:focus {
+  outline: none;
+}
