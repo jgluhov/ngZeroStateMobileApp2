@@ -67,7 +67,7 @@ module.exports = function (app) {
               .style('width', '100%').style('height', '100%')
               .attr('class', 'tags');
 
-            var margin = 30;
+            var margin = 40;
 
             svg.append("g").attr("class", "input");
             svg.append("g").attr("class", "cloud");
