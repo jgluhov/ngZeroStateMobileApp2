@@ -25,6 +25,7 @@ module.exports = function (app) {
             $scope.click = function (tag) {
               $scope.$apply(function () {
                 $scope.tags = parse($scope.tags, tag);
+                $scope.display();
               })
             };
 
@@ -66,9 +67,10 @@ module.exports = function (app) {
               .style('width', '100%').style('height', '100%')
               .attr('class', 'tags');
 
-            svg.append("g").attr("class", "up");
+            var margin = 30;
+
             svg.append("g").attr("class", "input");
-            svg.append("g").attr("class", "down");
+            svg.append("g").attr("class", "cloud");
 
             // Browser onresize event
             $window.onresize = tagsService.debouncer(function ($event) {
@@ -79,8 +81,7 @@ module.exports = function (app) {
 
             scope.render = function (data) {
               if (_.isEmpty(data)) {
-                d3.select(".up").selectAll('*').remove();
-                d3.select(".down").selectAll('*').remove();
+                d3.select(".cloud").selectAll('*').remove();
                 return;
               }
 
@@ -90,32 +91,32 @@ module.exports = function (app) {
               var h = element.parent()[0].clientHeight;
 
               // remove all previous items before render
-              d3.select(".up").selectAll('*').remove();
-              d3.select(".down").selectAll('*').remove();
+              d3.select(".cloud").selectAll('*').remove();
 
               if(d3.selectAll("foreignobject")[0].length == 0) {
                 d3.select(".tags > .input").append("foreignObject")
                   .attr("width", w)
                   .append("xhtml:body")
-                  .style("padding-top", h / 2 - 20 + "px")
+                  .style("padding-top", h / 2 - 55 + "px")
                   .attr("class", "uk-container-center");
 
                 element.find('body').append($compile($templateCache.get('cloud-input-template'))(scope));
               }
 
+
               var layoutUp = d3.layout.cloud()
-                .size([w, 100])
+                .size([w - margin, 80])
                 .words(data[0].map(function (d) {
-                  return {text: '# ' + d.name.toUpperCase(), size: 15 + Math.random() * 10, power: d.power};
+                  return {text: '# ' + d.name.toUpperCase(), size: 12 + Math.random() * 8, power: d.power};
                 }))
-                .padding(5)
+                .padding(10)
                 .rotate(function () { return 0; })
                 .font("Ubuntu")
                 .fontSize(function (d) { return d.size; })
                 .on("end", drawUp);
 
               function drawUp(words) {
-                d3.select(".tags > .down")
+                d3.select(".tags > .cloud")
                   .attr("width", layoutUp.size()[0])
                   .attr("height", layoutUp.size()[1])
                   .append("g")
@@ -142,9 +143,9 @@ module.exports = function (app) {
               }
 
               var layoutDown = d3.layout.cloud()
-                .size([w, 100])
+                .size([w, 80])
                 .words(data[1].map(function (d) {
-                  return {text: '# ' + d.name.toUpperCase(), size: 15 + Math.random() * 10, power: d.power};
+                  return {text: '# ' + d.name.toUpperCase(), size: 12 + Math.random() * 8, power: d.power};
                 }))
                 .padding(5)
                 .rotate(function () { return 0; })
@@ -153,11 +154,11 @@ module.exports = function (app) {
                 .on("end", drawDown);
 
               function drawDown(words) {
-                d3.select(".tags > .down")
+                d3.select(".tags > .cloud")
                   .attr("width", layoutDown.size()[0])
                   .attr("height", layoutDown.size()[1])
                   .append("g")
-                  .attr("transform", "translate(" + layoutDown.size()[0] / 2 + "," + (layoutDown.size()[1] + 150) + ")")
+                  .attr("transform", "translate(" + layoutDown.size()[0] / 2 + "," + (layoutDown.size()[1] + 110) + ")")
                   .selectAll("text")
                   .data(words)
                   .enter().append("text")
@@ -188,13 +189,18 @@ module.exports = function (app) {
             scope.$watch(function () {
               return scope.tags;
             }, function(text) {
-              if(!_.isUndefined(text)) {
+              // watch only if user click clear button
+              if(!_.isUndefined(text) && _.isNull(text)) {
                 scope.display(text);
               }
             });
 
+            scope.change = function(text) {
+              scope.display(text);
+            };
+
             scope.display = function (text) {
-              if (_.isUndefined(text)) _.isEmpty(scope.tags) == true ? text = '' : text = scope.tags;
+              if (_.isUndefined(text)) text = '';
               if (_.isNull(text)) text = '';
 
               if (!_.isEmpty(data)) return scope.render(data);

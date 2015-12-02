@@ -5,7 +5,7 @@ module.exports = function (app) {
         restrict: 'A',
         require: 'ngModel',
         link: function (scope, element, attr) {
-          var htmlMarkup = attr.clearBtnMarkup ? attr.clearBtnMarkup : '<div class="uk-icon-right tm-icon-right-clear uk-icon-cross"></div>';
+          var htmlMarkup = attr.clearBtnMarkup ? attr.clearBtnMarkup : '<div class="uk-icon-right tm-icon-right-clear uk-icon-clear_inputbox"></div>';
           var btn = angular.element(htmlMarkup);
           btn.addClass(attr.clearBtnClass ? attr.clearBtnClass : "clear-btn");
           element.after(btn);
