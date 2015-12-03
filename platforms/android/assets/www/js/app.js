@@ -1431,16 +1431,45 @@ module.exports = constants;
 require('./constants');
 require('./session');
 require('./tags');
+require('./feed');
 require('./home');
 
-var app = angular.module('ngZeroStateMobileApp', ['ui.router','snap','zsSession', 'zsHome', 'zsTags']);
+var app = angular.module('ngZeroStateMobileApp', ['ui.router','snap','zsSession', 'zsHome', 'zsTags','zsFeed']);
 
 require('./routes')(app);
 require('./config')(app);
 
 
-}).call(this,require("oMfpAn"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/fake_cb7a4a59.js","/")
-},{"./config":5,"./constants":7,"./home":10,"./routes":11,"./session":12,"./tags":18,"buffer":1,"oMfpAn":4}],9:[function(require,module,exports){
+}).call(this,require("oMfpAn"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/fake_74ff43de.js","/")
+},{"./config":5,"./constants":7,"./feed":11,"./home":13,"./routes":14,"./session":15,"./tags":21,"buffer":1,"oMfpAn":4}],9:[function(require,module,exports){
+(function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
+module.exports = function(app) {
+  app.controller('feedController', ['$scope', function($scope) {
+    console.log('feed')
+  }])
+};
+
+}).call(this,require("oMfpAn"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/feed/feedController.js","/feed")
+},{"buffer":1,"oMfpAn":4}],10:[function(require,module,exports){
+(function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
+module.exports = function(app) {
+  app.factory('feedFactory', ['$http', function($http) {
+
+  }])
+};
+
+}).call(this,require("oMfpAn"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/feed/feedFactory.js","/feed")
+},{"buffer":1,"oMfpAn":4}],11:[function(require,module,exports){
+(function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
+var feed = angular.module('zsFeed',['infinite-scroll']);
+
+require('./feedFactory')(feed);
+require('./feedController')(feed);
+
+module.exports = feed;
+
+}).call(this,require("oMfpAn"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/feed/index.js","/feed")
+},{"./feedController":9,"./feedFactory":10,"buffer":1,"oMfpAn":4}],12:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
 module.exports = function (home) {
   home.controller('homeController', ['$scope', '$rootScope', 'sessionService','localStorageService',
@@ -1460,7 +1489,7 @@ module.exports = function (home) {
 };
 
 }).call(this,require("oMfpAn"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/home/homeController.js","/home")
-},{"buffer":1,"oMfpAn":4}],10:[function(require,module,exports){
+},{"buffer":1,"oMfpAn":4}],13:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
 var home = angular.module('zsHome',[]);
 
@@ -1469,7 +1498,7 @@ require('./homeController')(home);
 module.exports = home;
 
 }).call(this,require("oMfpAn"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/home/index.js","/home")
-},{"./homeController":9,"buffer":1,"oMfpAn":4}],11:[function(require,module,exports){
+},{"./homeController":12,"buffer":1,"oMfpAn":4}],14:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
 module.exports = function(app) {
   app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
@@ -1495,7 +1524,7 @@ module.exports = function(app) {
   );
 };
 }).call(this,require("oMfpAn"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/routes/index.js","/routes")
-},{"buffer":1,"oMfpAn":4}],12:[function(require,module,exports){
+},{"buffer":1,"oMfpAn":4}],15:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
 var session = angular.module('zsSession',['zsConstants','LocalStorageModule']);
 
@@ -1507,7 +1536,7 @@ require('./signupController')(session);
 
 module.exports = session;
 }).call(this,require("oMfpAn"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/session/index.js","/session")
-},{"./sessionService":13,"./signinController":14,"./signinService":15,"./signupController":16,"./signupService":17,"buffer":1,"oMfpAn":4}],13:[function(require,module,exports){
+},{"./sessionService":16,"./signinController":17,"./signinService":18,"./signupController":19,"./signupService":20,"buffer":1,"oMfpAn":4}],16:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
 'use strict';
 
@@ -1558,7 +1587,7 @@ module.exports = function (app) {
 };
 
 }).call(this,require("oMfpAn"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/session/sessionService.js","/session")
-},{"buffer":1,"oMfpAn":4}],14:[function(require,module,exports){
+},{"buffer":1,"oMfpAn":4}],17:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
 'use strict';
 
@@ -1585,7 +1614,7 @@ module.exports = function (app) {
 };
 
 }).call(this,require("oMfpAn"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/session/signinController.js","/session")
-},{"buffer":1,"oMfpAn":4}],15:[function(require,module,exports){
+},{"buffer":1,"oMfpAn":4}],18:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
 'use strict';
 
@@ -1611,7 +1640,7 @@ module.exports = function (app) {
 };
 
 }).call(this,require("oMfpAn"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/session/signinService.js","/session")
-},{"buffer":1,"oMfpAn":4}],16:[function(require,module,exports){
+},{"buffer":1,"oMfpAn":4}],19:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
 module.exports = function (app) {
   app.controller('signupController', ['$scope', '$state', 'signupService', function ($scope, $state, signupService) {
@@ -1634,7 +1663,7 @@ module.exports = function (app) {
 };
 
 }).call(this,require("oMfpAn"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/session/signupController.js","/session")
-},{"buffer":1,"oMfpAn":4}],17:[function(require,module,exports){
+},{"buffer":1,"oMfpAn":4}],20:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
 'use strict';
 
@@ -1658,7 +1687,7 @@ module.exports = function (app) {
 };
 
 }).call(this,require("oMfpAn"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/session/signupService.js","/session")
-},{"buffer":1,"oMfpAn":4}],18:[function(require,module,exports){
+},{"buffer":1,"oMfpAn":4}],21:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
 'use strict';
 
@@ -1674,7 +1703,7 @@ require('./tagsController')(app);
 module.exports = app;
 
 }).call(this,require("oMfpAn"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/tags/index.js","/tags")
-},{"./tagsClearInputDirective":19,"./tagsConstants":20,"./tagsController":21,"./tagsDirective":22,"./tagsService":23,"./tagsTemplate":24,"buffer":1,"oMfpAn":4}],19:[function(require,module,exports){
+},{"./tagsClearInputDirective":22,"./tagsConstants":23,"./tagsController":24,"./tagsDirective":25,"./tagsService":26,"./tagsTemplate":27,"buffer":1,"oMfpAn":4}],22:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
 module.exports = function (app) {
   app.directive('clearInput', ['$parse',
@@ -1721,7 +1750,7 @@ module.exports = function (app) {
 };
 
 }).call(this,require("oMfpAn"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/tags/tagsClearInputDirective.js","/tags")
-},{"buffer":1,"oMfpAn":4}],20:[function(require,module,exports){
+},{"buffer":1,"oMfpAn":4}],23:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
 module.exports = function(app) {
   app.constant('tagsConstant', {
@@ -1735,7 +1764,7 @@ module.exports = function(app) {
 };
 
 }).call(this,require("oMfpAn"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/tags/tagsConstants.js","/tags")
-},{"buffer":1,"oMfpAn":4}],21:[function(require,module,exports){
+},{"buffer":1,"oMfpAn":4}],24:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
 'use strict';
 
@@ -1790,7 +1819,7 @@ module.exports = function (app) {
 };
 
 }).call(this,require("oMfpAn"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/tags/tagsController.js","/tags")
-},{"buffer":1,"oMfpAn":4}],22:[function(require,module,exports){
+},{"buffer":1,"oMfpAn":4}],25:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
 'use strict';
 
@@ -2032,7 +2061,7 @@ module.exports = function (app) {
 };
 
 }).call(this,require("oMfpAn"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/tags/tagsDirective.js","/tags")
-},{"buffer":1,"oMfpAn":4}],23:[function(require,module,exports){
+},{"buffer":1,"oMfpAn":4}],26:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
 module.exports = function (app) {
   app.service('tagsService', [function () {
@@ -2053,7 +2082,7 @@ module.exports = function (app) {
 };
 
 }).call(this,require("oMfpAn"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/tags/tagsService.js","/tags")
-},{"buffer":1,"oMfpAn":4}],24:[function(require,module,exports){
+},{"buffer":1,"oMfpAn":4}],27:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
 module.exports = function(app) {
   app.run(['$templateCache', function($templateCache) {
