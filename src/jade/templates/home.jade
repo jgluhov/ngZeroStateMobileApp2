@@ -11,5 +11,7 @@
     li: a(href='#') in world
 
 div(ng-controller='feedController')
+  div(ui-scroll-viewport='', style='height:300px; width: 200px; ')
+    div(ui-scroll='item in datasource', buffer-size='5') *{{item.content}}*
 
 a.btn-state-it.with-border(href="#") state it

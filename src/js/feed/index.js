@@ -1,4 +1,4 @@
-var feed = angular.module('zsFeed',['infinite-scroll']);
+var feed = angular.module('zsFeed',['ui.scroll']);
 
 require('./feedFactory')(feed);
 require('./feedController')(feed);

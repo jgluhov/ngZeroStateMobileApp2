@@ -12,6 +12,7 @@ var minify = require('gulp-minify-css');
 
 gulp.task('vendor:js', function() {
   gulp.src([
+    './bower_components/jquery/dist/jquery.min.js',
     './bower_components/angular/angular.min.js',
     './bower_components/ngCordova/dist/ng-cordova.min.js',
     './bower_components/angular-ui-router/release/angular-ui-router.min.js',
@@ -21,8 +22,7 @@ gulp.task('vendor:js', function() {
     './bower_components/d3/d3.min.js',
     './bower_components/d3-cloud/build/d3.layout.cloud.js',
     './bower_components/angular-local-storage/dist/angular-local-storage.min.js',
-    './bower_components/jquery/dist/jquery.min.js',
-    './bower_components/ngInfiniteScroll/build/ng-infinite-scroll.min.js'
+    './bower_components/angular-ui-scroll/dist/ui-scroll.js'
   ])
     .pipe(concat('vendor.min.js'))
     .pipe(gulp.dest('./www/js'))

@@ -1440,13 +1440,85 @@ require('./routes')(app);
 require('./config')(app);
 
 
-}).call(this,require("oMfpAn"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/fake_74ff43de.js","/")
+}).call(this,require("oMfpAn"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/fake_3172c96d.js","/")
 },{"./config":5,"./constants":7,"./feed":11,"./home":13,"./routes":14,"./session":15,"./tags":21,"buffer":1,"oMfpAn":4}],9:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
 module.exports = function(app) {
-  app.controller('feedController', ['$scope', function($scope) {
-    console.log('feed')
-  }])
+  app.controller('feedController', ['$scope', '$log', '$timeout', function($scope, console, $timeout) {
+
+        var datasource = {};
+        datasource.cache = {
+          initialize: function() {
+            this.isEnabled = true;
+            this.items = {};
+            this.getPure = datasource.get;
+            return datasource.get = this.getCached;
+          },
+          getCached: function(index, count, successCallback) {
+            var self;
+            self = datasource.cache;
+            if (self.isEnabled) {
+              if (self.getItems(index, count, successCallback)) {
+                return;
+              }
+              return self.getPure(index, count, function(result) {
+                self.saveItems(index, count, result);
+                return successCallback(result);
+              });
+            }
+            return self.getPure(index, count, successCallback);
+          },
+          toggle: function() {
+            this.isEnabled = !this.isEnabled;
+            return this.items = {};
+          },
+          saveItems: function(index, count, resultItems) {
+            var i, item, j, len, results;
+            results = [];
+            for (i = j = 0, len = resultItems.length; j < len; i = ++j) {
+              item = resultItems[i];
+              if (!this.items.hasOwnProperty(index + i)) {
+                results.push(this.items[index + i] = item);
+              } else {
+                results.push(void 0);
+              }
+            }
+            return results;
+          },
+          getItems: function(index, count, successCallback) {
+            var i, isCached, j, ref, ref1, result;
+            result = [];
+            isCached = true;
+            for (i = j = ref = index, ref1 = index + count - 1; j <= ref1; i = j += 1) {
+              if (!this.items.hasOwnProperty(i)) {
+                isCached = false;
+                return;
+              }
+              result.push(this.items[i]);
+            }
+            successCallback(result);
+            return true;
+          }
+        };
+        datasource.get = function(index, count, success) {
+          return $timeout(function() {
+            var i, item, j, ref, ref1, result;
+            result = [];
+            for (i = j = ref = index, ref1 = index + count - 1; ref <= ref1 ? j <= ref1 : j >= ref1; i = ref <= ref1 ? ++j : --j) {
+              item = {};
+              item.content = "item #" + i;
+              item.data = {
+                some: false
+              };
+              result.push(item);
+            }
+            return success(result);
+          }, 100);
+        };
+        $scope.datasource = datasource;
+        return datasource.cache.initialize();
+      }
+    ]);
 };
 
 }).call(this,require("oMfpAn"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/feed/feedController.js","/feed")
@@ -1461,7 +1533,7 @@ module.exports = function(app) {
 }).call(this,require("oMfpAn"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/feed/feedFactory.js","/feed")
 },{"buffer":1,"oMfpAn":4}],11:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
-var feed = angular.module('zsFeed',['infinite-scroll']);
+var feed = angular.module('zsFeed',['ui.scroll']);
 
 require('./feedFactory')(feed);
 require('./feedController')(feed);
